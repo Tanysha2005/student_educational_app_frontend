@@ -92,9 +92,11 @@ export default function Students() {
     load();
   };
 
-  const change = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const change = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setForm(prev => ({
+    setForm((prev) => ({
       ...prev,
       [name]: e.target.type === "number" ? Number(value) : value,
     }));
@@ -109,6 +111,19 @@ export default function Students() {
         </button>
       </div>
 
+      <div className="col-md-5 alert alert-danger">
+        Ошибка: Такая специальность уже существует
+      </div>
+      <div className="col-md-5 alert alert-danger">
+        Ошибка: Студент с таким номером зачётки существует
+      </div>
+      <div className="col-md-5 alert alert-success">
+        Специальность сохранена
+      </div>
+      <div className="col-md-5 alert alert-success">Студент сохранен</div>
+      <div className="col-md-5 alert alert-success">Специальность удалена</div>
+      <div className="col-md-5 alert alert-success">Студент удален</div>
+
       <table className="table table-bordered table-hover">
         <thead>
           <tr>
@@ -122,11 +137,15 @@ export default function Students() {
           </tr>
         </thead>
         <tbody>
-          {students.map(s => (
+          {students.map((s) => (
             <tr key={s.id_student}>
               <td>{s.id_student}</td>
-              <td>{s.surname} {s.name} {s.otchectvo}</td>
-              <td>{s.group_code}-{s.group_number}</td>
+              <td>
+                {s.surname} {s.name} {s.otchectvo}
+              </td>
+              <td>
+                {s.group_code}-{s.group_number}
+              </td>
               <td>{s.record_book_number}</td>
               <td>{s.admission_date}</td>
 
@@ -135,7 +154,9 @@ export default function Students() {
                   className="btn btn-link p-0"
                   onClick={() =>
                     setCardSpeciality(
-                      specialities.find(sp => sp.id_speciality === s.id_speciality) || null
+                      specialities.find(
+                        (sp) => sp.id_speciality === s.id_speciality
+                      ) || null
                     )
                   }
                 >
@@ -188,37 +209,75 @@ export default function Students() {
 
                 <div className="col-md-4">
                   <label className="form-label">Фамилия</label>
-                  <input className="form-control" name="surname" value={form.surname} onChange={change} />
+                  <input
+                    className="form-control"
+                    name="surname"
+                    value={form.surname}
+                    onChange={change}
+                  />
                 </div>
 
                 <div className="col-md-4">
                   <label className="form-label">Имя</label>
-                  <input className="form-control" name="name" value={form.name} onChange={change} />
+                  <input
+                    className="form-control"
+                    name="name"
+                    value={form.name}
+                    onChange={change}
+                  />
                 </div>
 
                 <div className="col-md-4">
                   <label className="form-label">Отчество</label>
-                  <input className="form-control" name="otchectvo" value={form.otchectvo} onChange={change} />
+                  <input
+                    className="form-control"
+                    name="otchectvo"
+                    value={form.otchectvo}
+                    onChange={change}
+                  />
                 </div>
 
                 <div className="col-md-4">
                   <label className="form-label">Год поступления</label>
-                  <input type="number" className="form-control" name="admission_date" value={form.admission_date} onChange={change} />
+                  <input
+                    type="number"
+                    className="form-control"
+                    name="admission_date"
+                    value={form.admission_date}
+                    onChange={change}
+                  />
                 </div>
 
                 <div className="col-md-4">
                   <label className="form-label">Номер группы</label>
-                  <input type="number" className="form-control" name="group_number" value={form.group_number} onChange={change} />
+                  <input
+                    type="number"
+                    className="form-control"
+                    name="group_number"
+                    value={form.group_number}
+                    onChange={change}
+                  />
                 </div>
 
                 <div className="col-md-4">
                   <label className="form-label">Код группы</label>
-                  <input className="form-control" name="group_code" value={form.group_code} onChange={change} />
+                  <input
+                    className="form-control"
+                    name="group_code"
+                    value={form.group_code}
+                    onChange={change}
+                  />
                 </div>
 
                 <div className="col-md-6">
                   <label className="form-label">Зачётка</label>
-                  <input type="number" className="form-control" name="record_book_number" value={form.record_book_number} onChange={change} />
+                  <input
+                    type="number"
+                    className="form-control"
+                    name="record_book_number"
+                    value={form.record_book_number}
+                    onChange={change}
+                  />
                 </div>
 
                 <div className="col-md-6">
@@ -230,7 +289,7 @@ export default function Students() {
                     onChange={change}
                   >
                     <option value={0}>Выберите</option>
-                    {specialities.map(s => (
+                    {specialities.map((s) => (
                       <option key={s.id_speciality} value={s.id_speciality}>
                         {s.id_speciality} — {s.speciality_name}
                       </option>
@@ -240,7 +299,10 @@ export default function Students() {
               </div>
 
               <div className="modal-footer">
-                <button className="btn btn-secondary" onClick={() => setShow(false)}>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => setShow(false)}
+                >
                   Отмена
                 </button>
                 <button className="btn btn-primary" onClick={save}>
@@ -259,7 +321,10 @@ export default function Students() {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Карточка специальности</h5>
-                <button className="btn-close" onClick={() => setCardSpeciality(null)} />
+                <button
+                  className="btn-close"
+                  onClick={() => setCardSpeciality(null)}
+                />
               </div>
               <div className="modal-body">
                 <pre className="mb-0">
